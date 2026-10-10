@@ -18,8 +18,16 @@ public:
 
 protected :
 	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
 
+//输入绑定函数
+	void Move(const struct FInputActionValue& Value);
 public:
+	//输入映射以及输入行为
 	UPROPERTY(EditAnywhere,Category="Input")
 	TObjectPtr<class UInputMappingContext> AuraContext;
+
+	UPROPERTY(EditAnywhere,Category="Input")
+	TObjectPtr<class UInputAction> MoveAction;
+
 };
