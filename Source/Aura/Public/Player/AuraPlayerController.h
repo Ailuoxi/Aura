@@ -20,6 +20,7 @@ protected :
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 
+	virtual void PlayerTick(float DeltaTime) override;
 //输入绑定函数
 	void Move(const struct FInputActionValue& Value);
 public:
@@ -29,5 +30,11 @@ public:
 
 	UPROPERTY(EditAnywhere,Category="Input")
 	TObjectPtr<class UInputAction> MoveAction;
-
+private:
+	//光标追踪函数
+	void CursorTrace();
+	//上一帧Actor
+	class IEnemyInterface* LastActor;
+	//当前一帧Actor
+	IEnemyInterface* ThisActor;
 };

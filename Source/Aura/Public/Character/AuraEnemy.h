@@ -17,4 +17,8 @@ class AURA_API AAuraEnemy : public AAuraCharacterBase,public IEnemyInterface
 public:
 	virtual void HighlightEnemy() override;//高亮
 	virtual void UnHighlightEnemy() override;//取消高亮
+
+	//是否高亮
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
+	bool bHighlight = false;
 };
