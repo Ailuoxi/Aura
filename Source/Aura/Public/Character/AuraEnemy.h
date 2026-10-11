@@ -15,6 +15,7 @@ class AURA_API AAuraEnemy : public AAuraCharacterBase,public IEnemyInterface
 {
 	GENERATED_BODY()
 public:
+	AAuraEnemy();
 	virtual void HighlightEnemy() override;//高亮
 	virtual void UnHighlightEnemy() override;//取消高亮
 
