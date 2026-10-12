@@ -3,6 +3,7 @@
 
 #include "Character/AuraCharacterBase.h"
 #include "../../../../../../../Source/Runtime/Engine/Classes/Components/SkeletalMeshComponent.h"
+#include "../../../../../../../Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Public/AbilitySystemComponent.h"
 
 
 AAuraCharacterBase::AAuraCharacterBase()
@@ -15,6 +16,11 @@ AAuraCharacterBase::AAuraCharacterBase()
 
 }
 
+
+UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
 
 void AAuraCharacterBase::BeginPlay()
 {
