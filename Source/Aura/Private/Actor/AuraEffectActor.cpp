@@ -2,6 +2,9 @@
 
 
 #include "Actor/AuraEffectActor.h"
+
+#include "AbilitySystemInterface.h"
+#include "AbilitySystem/AuraAttributeSet.h"
 #include "Components/SphereComponent.h"
 
 // Sets default values
@@ -19,7 +22,15 @@ AAuraEffectActor::AAuraEffectActor()
 void AAuraEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,const FHitResult& SweepResult)
 {
-	
+	//很快就会改为运用游戏效果，目前这样只是学习(用到了消除const的方法，这是不应该的)
+	if (IAbilitySystemInterface* ASCInterface=Cast<IAbilitySystemInterface>(OtherActor))
+	{
+		const UAuraAttributeSet* AuraAttributeSet =Cast<UAuraAttributeSet>(ASCInterface->GetAbilitySystemComponent()->GetAttributeSet(UAuraAttributeSet::StaticClass()));
+		
+		UAuraAttributeSet* MutableAuraAttributeSet = const_cast<UAuraAttributeSet*>(AuraAttributeSet);
+		MutableAuraAttributeSet->SetHealth(MutableAuraAttributeSet->GetHealth()+25.f);
+	}
+	Destroy();
 }
 
 void AAuraEffectActor::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
