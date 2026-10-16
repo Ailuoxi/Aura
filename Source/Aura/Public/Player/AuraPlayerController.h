@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "AuraPlayerController.generated.h"
 
+class IEnemyInterface;
 /**
  * 
  */
@@ -34,7 +35,7 @@ private:
 	//光标追踪函数
 	void CursorTrace();
 	//上一帧Actor
-	class IEnemyInterface* LastActor;
+	TObjectPtr<IEnemyInterface> LastActor;
 	//当前一帧Actor
-	IEnemyInterface* ThisActor;
+	TObjectPtr<IEnemyInterface> ThisActor;
 };
