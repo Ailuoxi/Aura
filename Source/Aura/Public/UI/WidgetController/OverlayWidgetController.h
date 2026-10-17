@@ -7,8 +7,11 @@
 #include "OverlayWidgetController.generated.h"
 
 struct FOnAttributeChangeData;
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealChangedSignature, float, NewHealth);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealChangedSignature,float,NewMaxHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature,float,NewMaxHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature,float,NewMana);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature,float,NewMaxMana);
+
 
 UCLASS(BlueprintType,Blueprintable)
 class AURA_API UOverlayWidgetController : public UAuraWidgetController
@@ -20,13 +23,24 @@ public:
 	
 	
 	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
-	FOnHealChangedSignature OnHealthChanged;//生命值改变委托
+	FOnHealthChangedSignature OnHealthChanged;//生命值改变委托
 	
 	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
-	FOnMaxHealChangedSignature OnMaxHealthChanged;//最大生命值改变委托
+	FOnMaxHealthChangedSignature OnMaxHealthChanged;//最大生命值改变委托
+	
+	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
+	FOnManaChangedSignature OnManaChanged;//魔法值改变委托
+	
+	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
+	FOnMaxManaChangedSignature OnMaxManaChanged;//最大魔法值改变委托
+	
 	
 protected:
 	void HealthChanged(const FOnAttributeChangeData& Data) const;
 	void MaxHealthChanged(const FOnAttributeChangeData& Data) const;
+	void ManaChanged(const FOnAttributeChangeData& Data) const;
+	void MaxManaChanged(const FOnAttributeChangeData& Data) const;
+	
+	
 	
 };
