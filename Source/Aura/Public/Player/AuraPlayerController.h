@@ -35,7 +35,7 @@ private:
 	//光标追踪函数
 	void CursorTrace();
 	//上一帧Actor
-	TObjectPtr<IEnemyInterface> LastActor;
+	IEnemyInterface* LastActor;
 	//当前一帧Actor
-	TObjectPtr<IEnemyInterface> ThisActor;
+	IEnemyInterface* ThisActor;
 };
