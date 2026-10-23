@@ -19,5 +19,5 @@ public:
 	virtual void OnRep_PlayerState() override;//在客户端进行ASC和AS初始化
 	virtual void PossessedBy(AController* NewController) override;//在服务器端进行ASC和AS初始化
 private:
-	void InitAbilityActorInfo();
+	virtual void InitAbilityActorInfo() override;
 };
