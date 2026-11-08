@@ -4,6 +4,7 @@
 #include "AbilitySystem/AuraAttributeSet.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "AuraGameplayTags.h"
 #include "GameplayEffectExtension.h"
 #include "../../../../../../../Source/Runtime/Engine/Public/Net/UnrealNetwork.h"
 #include "GameFramework/Character.h"
@@ -13,7 +14,8 @@ UAuraAttributeSet::UAuraAttributeSet()
 {
 	InitHealth(10.f);
 	InitMana(10.f);
-
+    InitTagtoAttributeMap();
+	
 }
 
 void UAuraAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
@@ -97,6 +99,26 @@ void UAuraAttributeSet::SetEffectProperties(const struct FGameplayEffectModCallb
 		Props.TargetCharacter = Cast<ACharacter>(Props.TargetAvatarActor);
 		Props.TargetASC=UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Props.TargetCharacter);
 	}
+	
+}
+
+void UAuraAttributeSet::InitTagtoAttributeMap()
+{
+	FAuraGameplayTags NativeTags=FAuraGameplayTags::Get();
+	TagToAttributeMap.Add(NativeTags.Attribute_Primary_Strength,GetStrengthAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Primary_Intelligence,GetIntelligenceAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Primary_Resilience,GetResilienceAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Primary_Vigor,GetVigorAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_Armor,GetArmorAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_ArmorPenetration,GetArmorPenetrationAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_BlockChance,GetBlockChanceAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_CriticalHitChance,GetCriticalHitChanceAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_CriticalHitDamage,GetCriticalHitDamageAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_CriticalHitResistance,GetCriticalHitResistanceAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_HealthRegeneration,GetHealthRegenerationAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_ManaRegeneration,GetManaRegenerationAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_MaxHealth,GetMaxHealthAttribute);
+	TagToAttributeMap.Add(NativeTags.Attribute_Secondary_MaxMana,GetMaxManaAttribute);
 	
 }
 

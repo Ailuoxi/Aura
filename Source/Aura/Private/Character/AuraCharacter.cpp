@@ -34,6 +34,7 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	InitAbilityActorInfo();
+	AddGameplayAbilities();
 }
 
 int32 AAuraCharacter::GetCharacterLevel()

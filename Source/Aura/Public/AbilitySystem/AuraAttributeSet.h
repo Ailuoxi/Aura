@@ -60,7 +60,11 @@ public:
 	
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 	
+	
+	
 
+	//Mapping Tag to Attribute
+	TMap<FGameplayTag,FGameplayAttribute(*)()> TagToAttributeMap;
 	
 	//Primary Ù–‘
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Strength,Category="Primary Attributes")
@@ -180,4 +184,5 @@ public:
 	
 private:
 	void SetEffectProperties(const struct FGameplayEffectModCallbackData& Data,FEffectProperties& Props) const;
+	void InitTagtoAttributeMap();
 };
